@@ -38,13 +38,15 @@ docker build -t etharaai-backend .
 docker run -p 8000:8000 --env-file .env etharaai-backend
 ```
 
+Copy `.env.example` to `.env` and update values before running locally.
+
 ## Run Locally
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-# Edit .env with your configuration
+cp .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 

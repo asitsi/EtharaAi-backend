@@ -1,0 +1,24 @@
+databases:
+  - name: inventory-db
+    databaseName: inventory_db
+    user: inventory
+    plan: free
+
+services:
+  - type: web
+    name: etharaai-backend
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inventory-db
+          property: connectionString
+      - key: CORS_ORIGINS
+        sync: false
+      - key: LOW_STOCK_THRESHOLD
+        value: "10"

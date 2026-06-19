@@ -35,10 +35,7 @@ Production-ready FastAPI backend for the Inventory & Order Management System.
 
 ```bash
 docker build -t etharaai-backend .
-docker run -p 8000:8000 \
-  -e DATABASE_URL=postgresql://user:pass@host:5432/dbname \
-  -e CORS_ORIGINS=http://localhost:3000 \
-  etharaai-backend
+docker run -p 8000:8000 --env-file .env etharaai-backend
 ```
 
 ## Run Locally
@@ -47,7 +44,7 @@ docker run -p 8000:8000 \
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
+# Edit .env with your configuration
 uvicorn app.main:app --reload --port 8000
 ```
 

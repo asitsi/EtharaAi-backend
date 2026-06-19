@@ -14,6 +14,15 @@ async def lifespan(app: FastAPI):
     yield
 
 
+def parse_cors_origins(cors_origins: str) -> list[str]:
+    origins = []
+    for origin in cors_origins.split(","):
+        origin = origin.strip().rstrip("/")
+        if origin:
+            origins.append(origin)
+    return origins
+
+
 app = FastAPI(
     title="Inventory & Order Management API",
     description="Production-ready API for managing products, customers, and orders",
@@ -21,7 +30,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-origins = [origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()]
+origins = parse_cors_origins(settings.cors_origins)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

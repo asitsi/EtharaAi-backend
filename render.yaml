@@ -9,6 +9,7 @@ services:
     name: etharaai-backend
     runtime: docker
     plan: free
+    region: oregon
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /health
